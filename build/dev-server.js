@@ -23,6 +23,16 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+var bodyParser = require('body-parser')
+
+app.use(bodyParser.json())
+// 处理请求
+app.post('/user/register', function (req, res) {
+  console.log('请求已经收到')
+  res.setHeader('Content-Type', 'text/plain')
+  res.end(JSON.stringify(req.body.usrName, null, 2))
+})
+
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
